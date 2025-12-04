@@ -55,11 +55,26 @@ git clone git@github.com:BrknBlade/Quacker.git
 ```shell
 git checkout nombre-de-tu-rama-personal
 ```
-3. Haces los cambios que se te han solicitado y haces un push
+Posteriormente me encargare de hacer un merge de todas las ramas y resolver sus conflicots. Procurar
+no hacer cambios muy grandes
+# Como desplegar
+1. Dentro del proyecto debes de ejecuatr los siguientes comandos:
+```shell
+composer install
+
+npm install
+
+cp .env.example .env
+
+php artisan key:generate
+
+php artisan migrate
+
+composer run dev
+```
+2. Haces los cambios que se te han solicitado y haces un push
 ```shell
 git add .
 git commint -m 'mensaje del commit'
-git push origin/nombre-de-tu-rama
+git push origin nombre-de-tu-rama
 ```
-Posteriormente me encargare de hacer un merge de todas las ramas y resolver sus conflicots. Procurar
-no hacer cambios muy grandes
