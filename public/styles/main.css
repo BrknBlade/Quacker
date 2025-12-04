@@ -1,0 +1,164 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 1rem;
+    background: #333;
+}
+
+.quack {
+    background: #aaa;
+    width: 50%;
+    padding:1rem;
+    border-radius:.5rem;
+    box-sizing:border-box;
+}
+
+.button_container {
+    display: flex;
+    gap: .5rem;
+}
+
+.delete_button {
+    width:7rem;
+    background: #b02;
+    color: #fff;
+    padding: .2rem;
+    border-radius: .5rem;
+    border:none;
+    font-weight: 700;
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.edit_button {
+    width:7rem;
+    background: #0b5;
+    color: #eee;
+    padding: .2rem;
+    border-radius: .5rem;
+    border:none;
+    font-weight: 700;
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.form {
+    background-color: #eee;
+    padding: .5rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20rem;
+    width: 15rem;
+    gap: .5rem;
+
+    input,textarea {
+        width: 90%;
+        resize: none;
+        font-size: 1rem;
+    }
+}
+
+.action_button {
+    background-color: #eee;
+    padding: .5rem;
+    border-radius: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    transition: all .2s;
+    position: absolute;
+}
+
+.create_quack_button {
+    left: 1rem;
+    top: 1rem;
+
+    img {
+        width: 3rem;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: #07c;
+        outline: 1px solid #0af;
+        animation-name: quackear;
+        animation-iteration-count: infinite;
+        animation-duration: 2s;
+    }
+}
+
+.create_quashtag_button {
+    left: 1rem;
+    top: 6rem;
+
+    img {
+        width: 3rem;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: #0c7;
+        outline: 1px solid #0fa;
+        animation-name: quashtags;
+        animation-iteration-count: infinite;
+        animation-duration: 2s;
+    }
+}
+
+@keyframes quackear {
+    0% {
+        box-shadow: 0 0 1rem #333;
+    }
+
+    25% {
+        box-shadow: 0 0 2rem #09b;
+    }
+
+    50% {
+        box-shadow: 0 0 1rem #333;
+    }
+
+    75% {
+        box-shadow: 0 0 2rem #09b;
+    }
+
+    100% {
+        box-shadow: 0 0 1rem #333;
+    }
+}
+
+@keyframes quashtags {
+    0% {
+        box-shadow: 0 0 1rem #333;
+    }
+
+    25% {
+        box-shadow: 0 0 2rem #0b9;
+    }
+
+    50% {
+        box-shadow: 0 0 1rem #333;
+    }
+
+    75% {
+        box-shadow: 0 0 2rem #0b9;
+    }
+
+    100% {
+        box-shadow: 0 0 1rem #333;
+    }
+}
