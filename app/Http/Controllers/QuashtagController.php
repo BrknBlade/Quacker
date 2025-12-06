@@ -53,6 +53,7 @@ class QuashtagController extends Controller
      */
     public function update(UpdateQuashtagRequest $request, Quashtag $quashtag)
     {
+        //Actualizar el quashtag
         $quashtag->update($request->all());
         return redirect('quacks');
     }
