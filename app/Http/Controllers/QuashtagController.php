@@ -62,6 +62,7 @@ class QuashtagController extends Controller
      */
     public function destroy(Quashtag $quashtag)
     {
+        //Eliminar el quashtag
         $quashtag->delete();
         return redirect('quacks');
     }
