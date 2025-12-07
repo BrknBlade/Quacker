@@ -59,6 +59,7 @@ class QuashtagController extends Controller
      */
     public function update(UpdateQuashtagRequest $request, Quashtag $quashtag)
     {
+        //Actualizar el quashtag
         $quashtag->update($request->all());
         return redirect('quashtags');
     }
@@ -68,6 +69,7 @@ class QuashtagController extends Controller
      */
     public function destroy(Quashtag $quashtag)
     {
+        //Eliminar el quashtag
         $quashtag->delete();
         return redirect('quacks');
     }
