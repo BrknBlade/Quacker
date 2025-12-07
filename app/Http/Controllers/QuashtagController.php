@@ -13,7 +13,9 @@ class QuashtagController extends Controller
      */
     public function index()
     {
-        return view('quashtags.index');
+        return view('quashtags.index', [
+            'quashtags' => Quashtag::latest()->get()
+        ]);
     }
 
     /**
@@ -58,7 +60,7 @@ class QuashtagController extends Controller
     public function update(UpdateQuashtagRequest $request, Quashtag $quashtag)
     {
         $quashtag->update($request->all());
-        return redirect('quacks');
+        return redirect('quashtags');
     }
 
     /**
