@@ -37,7 +37,9 @@ class QuashtagController extends Controller
      */
     public function show(Quashtag $quashtag)
     {
-        //
+        return view('quashtags.show',[
+            'quashtag' => $quashtag
+        ]);
     }
 
     /**
@@ -45,7 +47,9 @@ class QuashtagController extends Controller
      */
     public function edit(Quashtag $quashtag)
     {
-        //
+        return view('quashtags.edit', [
+            'quashtag' => $quashtag
+        ]);
     }
 
     /**
