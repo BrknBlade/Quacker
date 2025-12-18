@@ -17,7 +17,8 @@ class QuashtagFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->title()
+            'title' => fake()->title(),
+            'idQuashtag' => fake()->numberBetween(1, 50)
         ];
     }
 }

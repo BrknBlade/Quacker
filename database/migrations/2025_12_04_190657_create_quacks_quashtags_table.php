@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quacks.quashtags', function(Blueprint $table) {
+        Schema::create('quacks_quashtags', function(Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Quack::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Quashtag::class)->constrained()->onDelete('cascade');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quacks.quashtags');
+        Schema::dropIfExists('quacks_quashtags');
     }
 };
