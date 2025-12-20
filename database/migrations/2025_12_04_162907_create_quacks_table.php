@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('mensaje');
             $table->string('nickname');
+            $table->string('img')->default('default_post.jpg');
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@
         <title>Editando #{{ $quashtag->title }}</title>
     </head>
     <body>
+        <x-layout />
         <form method="post" action="/quashtags/{{ $quashtag->id }}" class="form">
             @csrf
             @method('PATCH')

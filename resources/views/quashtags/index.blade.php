@@ -7,6 +7,7 @@
     <title>Quashtags</title>
 </head>
 <body>
+    <x-layout />
     @foreach ($quashtags as $quashtag)
         <article class="quack">
             <h2>{{ $quashtag->title }}</h2>
@@ -18,10 +19,7 @@
                     @method('DELETE')
                     <input type="submit" value="Delete" class="delete_button">
                 </form>
-                <form method="get" action="/quashtags/{{ $quashtag->id }}/edit">
-                    @csrf
-                    <input type="submit" value="Editar" class="edit_button">
-                </form>
+                <a href="/quashtags/{{ $quashtag->id }}/edit" class="edit_button">Editar</a>
             </div>
         </article>
     @endforeach

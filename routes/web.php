@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuackController;
 use App\Http\Controllers\QuashtagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
@@ -18,3 +19,4 @@ Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
 
 Route::get('/quacks', [QuackController::class, 'index'])->middleware('auth');
+Route::resource('users', UserController::class);
