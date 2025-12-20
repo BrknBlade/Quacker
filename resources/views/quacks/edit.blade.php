@@ -7,6 +7,7 @@
     <title>Edit {{ $quack->nickname }}</title>
 </head>
 <body>
+    <x-layout />
     <form method="post" action="/quacks/{{ $quack->id }}" class="form">
         @csrf
         @method('PATCH')

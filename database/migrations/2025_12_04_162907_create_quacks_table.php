@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('mensaje');
             $table->string('nickname');
+            $table->string('img')->default('default_post.jpg');
             $table->timestamps();
         });
     }
