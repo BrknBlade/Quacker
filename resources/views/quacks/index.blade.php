@@ -9,6 +9,12 @@
 </head>
 
 <body>
+    @auth
+        <form action="/logout" method="POST" style="text-align: right; padding: 10px;">
+            @csrf
+            <button type="submit" class="delete_button">Cerrar Sesión</button>
+        </form>
+    @endauth
     <a href="{{ route('quacks.create') }}" class="action_button create_quack_button">
         <img src="/img/Quack.png" alt="quacker">
     </a>
