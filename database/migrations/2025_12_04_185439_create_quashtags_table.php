@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('quashtags', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('idQuashtag');
             $table->timestamps();
         });
     }

@@ -45,4 +45,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function following(){
+        return $this->belongsToMany(User::class, 'user_user', 'follower_id', 'following_id');
+    }
+
+    public function followers(){
+        return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id');
+    }
+
+    public function quacks(){
+        return $this->hasMany(Quack::class);
+    }
+
+    public function requacks(){
+        return $this->belongsToMany(Quack::class, 'quack_user', 'user_id', 'quack_id');
+    }
+
+    public function quaveos(){
+        return $this->belongsToMany(Quack::class, 'quack_user_quav', 'user_id', 'quack_id');
+    }
 }
