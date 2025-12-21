@@ -3,7 +3,7 @@
     <p class="quack_content">{{ $mensaje }}</p>
     <img src="/img/{{ $img }}" alt="post_img">
     @if ($detalles != 'false')
-        <a href="/quacks/{{ $id }}">ver detalles</a>
+        <a href="/quacks/{{ $id }}" class="details_button">ver detalles</a>
     @endif
     <div class="button_container">
         <form method="post" action="/quacks/{{ $id }}">
