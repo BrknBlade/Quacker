@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -54,7 +55,7 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id');
     }
 
-    public function quacks(){
+    public function quacks(): HasMany {
         return $this->hasMany(Quack::class);
     }
 

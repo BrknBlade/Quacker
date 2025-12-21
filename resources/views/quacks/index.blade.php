@@ -16,11 +16,13 @@
     @foreach ($quacks as $quack)
         <x-quack
             id="{{ $quack->id }}"
-            nickname="{{ $quack->nickname }}"
+            titulo="{{ $quack->titulo }}"
             mensaje="{{ $quack->mensaje }}"
             img="{{ $quack->img }}"
             detalles="true"
             comentarios="false"
+            user="{{ $quack->user_id }}"
+            name="{{ $quack->author->name }}"
         />
     @endforeach
 </body>

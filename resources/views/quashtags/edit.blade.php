@@ -8,14 +8,16 @@
     </head>
     <body>
         <x-layout />
-        <form method="post" action="/quashtags/{{ $quashtag->id }}" class="form">
-            @csrf
-            @method('PATCH')
+        <section class="auth_form">
+            <form method="post" action="/quashtags/{{ $quashtag->id }}" class="form">
+                @csrf
+                @method('PATCH')
 
-            <label for="title">Nombre del Quashtag:</label>
-            <input id="title" type="text" name="title" value="{{ $quashtag->title }}">
+                <label for="title">Nombre del Quashtag:</label>
+                <input id="title" type="text" name="title" value="{{ $quashtag->title }}">
 
-            <input type="submit" value="Actualizar Quashtag" class="edit_button">
-        </form>
+                <input type="submit" value="Actualizar Quashtag" class="edit_button">
+            </form>
+        </section>
     </body>
 </html>

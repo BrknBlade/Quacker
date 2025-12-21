@@ -22,7 +22,7 @@ class StoreQuackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nickname' => ['required','string'],
+            'titulo' => ['required','string'],
             'mensaje' => ['required','string']
         ];
     }

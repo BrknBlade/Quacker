@@ -12,7 +12,7 @@ class Quack extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nickname',
+        'titulo',
         'mensaje',
         'user_id'
     ];
@@ -32,5 +32,4 @@ class Quack extends Model
     public function quashtags(){
         return $this->belongsToMany(Quashtag::class, 'quack_quashtag', 'quack_id', 'quashtag_id');
     }
-
 }

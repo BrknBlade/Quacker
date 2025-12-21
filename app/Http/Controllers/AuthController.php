@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use App\Http\Requests\SessionRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
     public function create() {
         return view('auth.register');
     }
@@ -33,13 +30,6 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect(route('login'));
-
     }
-
-
-
 }
-
-
-
 ?>

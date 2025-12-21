@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => bcrypt('123456'),
         ]);
 
-        Quack::factory(10)->create([
-            'user_id' => $user->id,
-        ]);
+        /* Quack::factory(10)->create([ */
+        /*     'user_id' => $user->id, */
+        /* ]); */
 
         Quashtag::factory(10)->create();
     }

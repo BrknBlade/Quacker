@@ -22,3 +22,7 @@ Route::get('/register', [AuthController::class, 'create']);
 Route::post('/register', [AuthController::class, 'store']);
 
 Route::resource('users', UserController::class);
+
+Route::get('/user/quacks', [UserController::class, 'quacks'])
+    ->name('user.quacks')
+    ->middleware('auth');

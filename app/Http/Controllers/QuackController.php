@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreQuackRequest;
 use App\Http\Requests\UpdateQuackRequest;
 use App\Models\Quack;
+use Illuminate\Support\Facades\Auth;
 
 class QuackController extends Controller
 {
@@ -13,7 +14,9 @@ class QuackController extends Controller
      */
     public function index()
     {
-        $quacks = Quack::latest()->get();
+        $quacks = Quack::latest()->with([
+            'author:id,name'
+        ])->get();
 
         return view('quacks.index', compact('quacks'));
     }
@@ -30,12 +33,13 @@ class QuackController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreQuackRequest $request)
-{
-    // Esto asocia automáticamente el user_id
-    $request->user()->quacks()->create($request->all());
+    {
+        $user = Auth::user();
 
-    return redirect('quacks');
-}
+        // Esto asocia automáticamente el user_id
+        $user->quacks()->create($request->all());
+        return redirect('quacks');
+    }
 
     /**
      * Display the specified resource.
