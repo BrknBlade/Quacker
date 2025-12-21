@@ -58,11 +58,11 @@ class User extends Authenticatable
         return $this->hasMany(Quack::class);
     }
 
-    public function requacks(){
+    public function requackedQuacks(){
         return $this->belongsToMany(Quack::class, 'quack_user', 'user_id', 'quack_id');
     }
 
-    public function quaveos(){
+    public function quavedQuacks(){
         return $this->belongsToMany(Quack::class, 'quack_user_quav', 'user_id', 'quack_id');
     }
 }

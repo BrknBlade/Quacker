@@ -17,8 +17,20 @@ class Quack extends Model
         'user_id'
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function requackers() {
+        return $this->belongsToMany(User::class, 'queacker_user', 'quack_id', 'user_id');
+    }
+
+    public function quavers() {
+        return $this->belongsToMany(User::class, 'quack_user_quav', 'quack_id', 'user_id');
+    }
+
+    public function quashtags(){
+        return $this->belongsToMany(Quashtag::class, 'quack_quashtag', 'quack_id', 'quashtag_id');
     }
 
 }
