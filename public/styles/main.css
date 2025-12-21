@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-/* Esto no fue hecho por IA, simplemente me inspire y encontre
-* esta herramien para generar UI colors https://www.iamsajid.com/ui-colors/
-*/
+
 :root {
---bg-dark: oklch(0.92 0.025 251);
---bg: oklch(0.96 0.025 251);
---bg-light: oklch(1 0.025 251);
---text: oklch(0.15 0.05 251);
---text-muted: oklch(0.4 0.05 251);
---highlight: oklch(1 0.05 251);
---border: oklch(0.6 0.05 251);
---border-muted: oklch(0.7 0.05 251);
---primary: oklch(0.4 0.1 251);
---secondary: oklch(0.4 0.1 71);
---danger: oklch(0.5 0.05 30);
---warning: oklch(0.5 0.05 100);
---success: oklch(0.5 0.05 160);
---info: oklch(0.5 0.05 260);
+    --bg-dark: hsl(216 18 16);
+    --bg: hsl(216 18 26);
+    --bg-light: hsl(216 18 36);
+    --text: hsl(0 0 93);
+    --text-muted: hsl(0 0 83);
+    --border: hsl(216 18 26);
+    --border-muted: hsl(216 18 20);
+    --primary: hsl(183 100 35);
+    --secondary: hsl(51 100 35);
+    --danger: hsl(354 70 50);
+    --warning: hsl(50 94 49);
+    --success: hsl(99 53 55);
+}
+
+* {
+    font-family: "Lexend", sans-serif;
 }
 
 * {
@@ -42,9 +42,83 @@ body {
     margin-top: 5rem;
 }
 
+.auth_form_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+}
+
+.auth_form {
+    background-color: var(--bg-light);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--text);
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    a {
+        color: var(--text);
+    }
+}
+
+.form {
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    input, textarea {
+        width: 100%;
+        resize: none;
+        font-size: 1rem;
+        padding: 1rem .5rem;
+        border-radius: .5rem;
+        border: none;
+        box-sizing: border-box;
+    }
+
+    .input_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+            align-self: flex-start;
+        }
+    }
+
+    input[type=submit] {
+        background-color: var(--primary);
+    }
+
+    .remember {
+        display: flex;
+        justify-self: center;
+        align-self: center;
+    }
+}
+
 .quack {
     background: var(--bg-light);
-    box-shadow: 0 .5rem .5rem var(--border);
+    box-shadow: 0 .5rem .5rem var(--border-muted);
     border: 1px solid var(--border-muted);
     width: min(70%, 50rem);
     padding:1rem;
@@ -52,13 +126,15 @@ body {
     box-sizing:border-box;
     color: var(--text);
 
+    .quack_username {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 0;
+    }
+
     .quack_title {
         display: inline;
         font-size: 18px;
-        &:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
     }
 
     .quack_content {
@@ -72,13 +148,19 @@ body {
         border-radius: .5rem;
     }
 
+    .details_button {
+        display: block;
+        color: var(--text);
+        margin: 1rem 0;
+    }
+
     .comments {
         margin-top: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 1rem;
-        background-color: var(--bg-dark);
+        background-color: var(--bg);
         border-radius: .5rem;
 
         input[type=text] {
@@ -128,37 +210,10 @@ body {
     }
 }
 
-.form {
-    background-color: #eee;
-    padding: .5rem;
-    border-radius: .5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 20rem;
-    width: 15rem;
-    gap: .5rem;
-
-    input,textarea {
-        width: 90%;
-        resize: none;
-        font-size: 1rem;
-    }
-}
-
-.action_button_container {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
 .action_button {
+    position: fixed;
+    left: 3rem;
+    top: 6rem;
     background-color: var(--bg-light);
     padding: .5rem;
     border-radius: 5rem;
@@ -168,7 +223,7 @@ body {
     width: 3rem;
     height: 3rem;
     transition: all .2s;
-    box-shadow: 0 .2rem .5rem var(--text-muted);
+    box-shadow: 0 .2rem .5rem var(--border-muted);
 }
 
 .create_quack_button {
@@ -177,7 +232,6 @@ body {
     }
 
     &:hover {
-        transform: scale(1.05);
         background-color: #07c;
         outline: 1px solid #0af;
         box-shadow: 0 .2rem .5rem #09b;
@@ -222,7 +276,8 @@ header {
     width: 100%;
     background: var(--bg-light);
     padding: 1rem;
-    box-shadow: 0 .5rem .5rem var(--border);
+    box-shadow: 0 .5rem .5rem var(--border-muted);
+    height: 2rem;
 }
 
 .header_menu_container {
@@ -249,22 +304,83 @@ header {
 
 .icon {
     width: 24px;
-
-    /* path { */
-    /*     color: white; */
-    /*     fill: white; */
-    /*     stroke: white; */
-    /* } */
+    path {
+        color: var(--text);
+        fill: var(--text);
+    }
 }
 
 .header_link {
-    padding: 1rem 2rem;
+    padding: .5rem 2rem;
     background: var(--bg);
     border-radius: .5rem;
+}
+
+.auth_user_name {
+    color: var(--text);
 }
 
 .user_img {
     width: 3rem;
     border-radius: 3rem;
     border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.float_menu {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    right: min(7rem,10%);
+    top: 4rem;
+    background-color: var(--bg);
+    box-shadow: 0 .5rem .5rem var(--border-muted);
+    border-radius: .5rem;
+    width: 15rem;
+
+    a {
+        text-align: center;
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        padding: .5rem 0;
+        margin: .5rem;
+        border-radius: .5rem;
+        width: 90%;
+        color: var(--text);
+        font-size: 1rem;
+
+        &:hover {
+            background: var(--bg-light);
+            cursor: pointer;
+        }
+
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    input {
+        background: transparent;
+        border: none;
+        padding: .5rem;
+        border-radius: .5rem;
+        width: 90%;
+        color: var(--text);
+        font-size: 1rem;
+
+        &:hover {
+            background: var(--bg-light);
+            cursor: pointer;
+        }
+    }
+}
+
+.show_float_menu {
+    display: flex;
 }

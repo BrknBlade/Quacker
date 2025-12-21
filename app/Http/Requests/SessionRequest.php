@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuackRequest extends FormRequest
+class SessionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,17 @@ class StoreQuackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo' => ['required','string'],
-            'mensaje' => ['required','string']
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El campo email debe ser un correo electrónico válido.',
+            'password.required' => 'La contraseña es obligatoria.',
         ];
     }
 }

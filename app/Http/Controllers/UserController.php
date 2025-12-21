@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,22 +18,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // TODO: This shlould return the register view
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // TODO: pesar en como see almacena esto, si es SessionController o aquie en nuser controller
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(User $user)
@@ -44,26 +28,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the quacks quacked by the authenticated user
      */
-    public function edit(User $user)
-    {
-        // WARNING: Edit an user is not an option
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        // NOTE: It's not necesary right now but maybe we need a user connnfig view
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        // NOTE: User can delete his own account. At the moment you don't need confirmation
+    public function quacks() {
+        return view('quacks.user.show', [
+            'quacks' => Auth::user()->quacks()->get()
+        ]);
     }
 }

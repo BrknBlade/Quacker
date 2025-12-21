@@ -13,11 +13,13 @@ class quack extends Component
      */
     public function __construct(
         public string $id,
-        public string $nickname,
+        public string $titulo,
         public string $mensaje,
         public string $img,
         public string $detalles,
-        public string $comentarios
+        public string $comentarios,
+        public string $user,
+        public string $name
     ){}
 
     /**

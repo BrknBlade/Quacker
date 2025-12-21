@@ -8,15 +8,17 @@
 </head>
 <body>
     <x-layout />
-    <form method="post" action="/quacks" class='form'>
-        @csrf
-        <label for="nickname">Nickname:</label>
-        <input id="nickname" type="text" name="nickname">
+    <section class="auth_form">
+        <form method="post" action="/quacks" class='form'>
+            @csrf
+            <label for="titulo">Titulo:</label>
+            <input id="titulo" type="text" name="titulo" placeholder="Titulo del tu Quack">
 
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="5" cols="20"></textarea>
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" cols="20" placeholder="En que estas pensando hoy?"></textarea>
 
-        <input type="submit" value="Publicar Quack" class="edit_button">
-    </form>
+            <input type="submit" value="Publicar Quack" class="edit_button">
+        </form>
+    </section>
 </body>
 </html>
