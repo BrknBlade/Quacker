@@ -21,5 +21,4 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/register', [AuthController::class, 'create']);
 Route::post('/register', [AuthController::class, 'store']);
 
-Route::get('/quacks', [QuackController::class, 'index'])->middleware('auth');
 Route::resource('users', UserController::class);
