@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\SessionRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -45,5 +44,4 @@ class SessionController extends Controller
 
         return redirect('/')->with('success', '¡Has cerrado sesión correctamente!');
     }
-
 }

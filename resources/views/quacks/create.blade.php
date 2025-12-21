@@ -7,6 +7,7 @@
     <title>Crear Quack</title>
 </head>
 <body>
+    <x-layout />
     <form method="post" action="/quacks" class='form'>
         @csrf
         <label for="nickname">Nickname:</label>

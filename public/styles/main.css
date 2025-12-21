@@ -1,5 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: hsl(216 18 16);
+    --bg: hsl(216 18 26);
+    --bg-light: hsl(216 18 36);
+    --text: hsl(0 0 93);
+    --text-muted: hsl(0 0 83);
+    --border: hsl(216 18 26);
+    --border-muted: hsl(216 18 20);
+    --primary: hsl(183 100 35);
+    --secondary: hsl(51 100 35);
+    --danger: hsl(354 70 50);
+    --warning: hsl(50 94 49);
+    --success: hsl(99 53 55);
+}
+
 * {
-    font-family: sans-serif;
+    font-family: "Lexend", sans-serif;
 }
 
 body {
@@ -7,15 +24,65 @@ body {
     flex-direction:column;
     align-items:center;
     gap: 1rem;
-    background: #333;
+    background: var(--bg-dark);
+    margin-top: 5rem;
 }
 
 .quack {
-    background: #aaa;
-    width: 50%;
+    background: var(--bg-light);
+    box-shadow: 0 .5rem .5rem var(--border-muted);
+    border: 1px solid var(--border-muted);
+    width: min(70%, 50rem);
     padding:1rem;
     border-radius:.5rem;
     box-sizing:border-box;
+    color: var(--text);
+
+    .quack_title {
+        display: inline;
+        font-size: 18px;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    .quack_content {
+        font-size: 16px;
+        font-weight: 300;
+        color: var(--text-muted);
+    }
+
+    img {
+        width: 100%;
+        border-radius: .5rem;
+    }
+
+    .details_button {
+        display: block;
+        color: var(--text);
+        margin: 1rem 0;
+    }
+
+    .comments {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        background-color: var(--bg);
+        border-radius: .5rem;
+
+        input[type=text] {
+            box-sizing: border-box;
+            height: 2.5rem;
+            width: 70%;
+            border-radius: .5rem;
+            border: 1px solid var(--border);
+            padding-left: 2rem;
+            margin: .5rem;
+        }
+    }
 }
 
 .button_container {
@@ -25,7 +92,7 @@ body {
 
 .delete_button {
     width:7rem;
-    background: #b02;
+    background: var(--danger);
     color: #fff;
     padding: .2rem;
     border-radius: .5rem;
@@ -39,12 +106,14 @@ body {
 
 .edit_button {
     width:7rem;
-    background: #0b5;
+    background: var(--success);
     color: #eee;
     padding: .2rem;
     border-radius: .5rem;
     border:none;
     font-weight: 700;
+    text-decoration: none;
+    text-align: center;
 
     &:active {
         transform: scale(0.95);
@@ -71,7 +140,10 @@ body {
 }
 
 .action_button {
-    background-color: #eee;
+    position: fixed;
+    left: 3rem;
+    top: 6rem;
+    background-color: var(--bg-light);
     padding: .5rem;
     border-radius: 5rem;
     display: flex;
@@ -80,31 +152,22 @@ body {
     width: 3rem;
     height: 3rem;
     transition: all .2s;
-    position: absolute;
+    box-shadow: 0 .2rem .5rem var(--border-muted);
 }
 
 .create_quack_button {
-    left: 1rem;
-    top: 1rem;
-
     img {
         width: 3rem;
     }
 
     &:hover {
-        transform: scale(1.05);
         background-color: #07c;
         outline: 1px solid #0af;
-        animation-name: quackear;
-        animation-iteration-count: infinite;
-        animation-duration: 2s;
+        box-shadow: 0 .2rem .5rem #09b;
     }
 }
 
 .create_quashtag_button {
-    left: 1rem;
-    top: 6rem;
-
     img {
         width: 3rem;
     }
@@ -112,6 +175,7 @@ body {
     &:hover {
         transform: scale(1.05);
         background-color: #0c7;
+        box-shadow: 0 .2rem .5rem #0b9;
         outline: 1px solid #0fa;
         animation-name: quashtags;
         animation-iteration-count: infinite;
@@ -119,46 +183,110 @@ body {
     }
 }
 
-@keyframes quackear {
-    0% {
-        box-shadow: 0 0 1rem #333;
+.show_users_button {
+    img {
+        width: 3rem;
     }
 
-    25% {
-        box-shadow: 0 0 2rem #09b;
-    }
-
-    50% {
-        box-shadow: 0 0 1rem #333;
-    }
-
-    75% {
-        box-shadow: 0 0 2rem #09b;
-    }
-
-    100% {
-        box-shadow: 0 0 1rem #333;
+    &:hover {
+        transform: scale(1.05);
+        background-color: #c07;
+        outline: 1px solid #f0a;
+        box-shadow: 0 .2rem .5rem #b09;
     }
 }
 
-@keyframes quashtags {
-    0% {
-        box-shadow: 0 0 1rem #333;
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--bg-light);
+    padding: 1rem;
+    box-shadow: 0 .5rem .5rem var(--border-muted);
+    height: 2rem;
+}
+
+.header_menu_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        a {
+            text-decoration: none;
+            color: var(--text);
+
+            &:hover {
+                background: var(--bg-dark);
+            }
+        }
+    }
+}
+
+.icon {
+    width: 24px;
+    path {
+        color: var(--text);
+        fill: var(--text);
+    }
+}
+
+.header_link {
+    padding: .5rem 2rem;
+    background: var(--bg);
+    border-radius: .5rem;
+}
+
+.user_img {
+    width: 3rem;
+    border-radius: 3rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.float_menu {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    right: min(7rem,10%);
+    top: 4rem;
+    background-color: var(--bg);
+    box-shadow: 0 .5rem .5rem var(--border-muted);
+    border-radius: .5rem;
+    width: 15rem;
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
-    25% {
-        box-shadow: 0 0 2rem #0b9;
-    }
+    input {
+        background: transparent;
+        border: none;
+        padding: .5rem;
+        border-radius: .5rem;
+        width: 90%;
+        color: var(--text);
+        font-size: 1rem;
 
-    50% {
-        box-shadow: 0 0 1rem #333;
+        &:hover {
+            background: var(--bg-light);
+            cursor: pointer;
+        }
     }
+}
 
-    75% {
-        box-shadow: 0 0 2rem #0b9;
-    }
-
-    100% {
-        box-shadow: 0 0 1rem #333;
-    }
+.show_float_menu {
+    display: flex;
 }

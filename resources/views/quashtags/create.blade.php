@@ -6,6 +6,7 @@
     <title>Creating a Quashtag</title>
 </head>
 <body>
+    <x-layout />
     <h1>Creating a Quashtag</h1>
 </body>
 </html>
