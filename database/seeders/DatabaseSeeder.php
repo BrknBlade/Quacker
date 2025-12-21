@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('123456'),
+            'name' => 'Ignacio',
+            'email' => 'ignacio@email.com',
+            'password' => bcrypt('amoelmvc'),
         ]);
 
         /* Quack::factory(10)->create([ */
