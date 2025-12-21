@@ -12,6 +12,7 @@ class Quack extends Model
 
     protected $fillable = [
         'nickname',
-        'mensaje'
+        'mensaje',
+        'user_id'
     ];
 }

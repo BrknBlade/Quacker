@@ -13,9 +13,9 @@ class QuackController extends Controller
      */
     public function index()
     {
-        return view('quacks.index', [
-            'quacks' => Quack::latest()->get()
-        ]);
+        $quacks = Quack::latest()->get();
+
+        return view('quacks.index', compact('quacks'));
     }
 
     /**
@@ -30,10 +30,12 @@ class QuackController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreQuackRequest $request)
-    {
-        Quack::create($request->all());
-        return redirect('quacks');
-    }
+{
+    // Esto asocia automáticamente el user_id
+    $request->user()->quacks()->create($request->all());
+
+    return redirect('quacks');
+}
 
     /**
      * Display the specified resource.
