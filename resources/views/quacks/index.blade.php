@@ -12,6 +12,7 @@
     @auth
         <form action="/logout" method="POST" style="text-align: right; padding: 10px;">
             @csrf
+            <h2 style="color:white;">Bienvenido {{ Auth::user()->name }}</h2>
             <button type="submit" class="delete_button">Cerrar Sesión</button>
         </form>
     @endauth
