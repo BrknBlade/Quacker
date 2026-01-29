@@ -22,7 +22,7 @@ class Quack extends Model
     }
 
     public function requackers() {
-        return $this->belongsToMany(User::class, 'quack_user', 'quack_id', 'user_id');
+        return $this->belongsToMany(User::class, 'quacker_user', 'quack_id', 'user_id');
     }
 
     public function quavers() {

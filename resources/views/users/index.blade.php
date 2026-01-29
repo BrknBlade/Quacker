@@ -11,9 +11,9 @@
     @foreach ($users as $user)
         <div class="quack">
             <p>{{ $user->name }}</p>
-            <p>{{ $user->email }}</p>
-            <p>{{ $user->created_at }}</p>
-            <a href="/users/{{ $user->id }}">Ver</a>
+            <!-- <p>{{ $user->email }}</p> -->
+            <!-- <p>{{ $user->created_at }}</p> -->
+            <a href="{{ route('users.show', $user->id) }}">Detalles</a>
         </div>
     @endforeach
 </body>
