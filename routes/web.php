@@ -11,9 +11,6 @@ Route::get('/', function () {
     return redirect('quacks');
 });
 
-Route::resource('quacks', QuackController::class)->middleware('auth');
-Route::resource('quashtags', QuashtagController::class)->middleware('auth');
-
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
@@ -21,8 +18,17 @@ Route::post('/logout', [SessionController::class, 'destroy']);
 Route::get('/register', [AuthController::class, 'create']);
 Route::post('/register', [AuthController::class, 'store']);
 
-Route::resource('users', UserController::class);
+Route::middleware('auth')->group(function() {
+    Route::resource('quacks', QuackController::class)->middleware('auth');
+    Route::resource('quashtags', QuashtagController::class)->middleware('auth');
 
-Route::get('/user/quacks', [UserController::class, 'quacks'])
-    ->name('user.quacks')
-    ->middleware('auth');
+    Route::get('/users/{user}/quacks', [UserController::class, 'quacks'])->name('user.quacks');
+    Route::post('/users/{user}/follow', [UserController::class, 'follow'])->name('users.follow');
+    Route::post('/users/{user}/unfollow', [UserController::class, 'unfollow'])->name('users.unfollow');
+    Route::resource('users', UserController::class);
+});
+
+
+/* Route::get('/user/quacks', [UserController::class, 'quacks']) */
+/*     ->name('user.quacks') */
+/*     ->middleware('auth'); */
