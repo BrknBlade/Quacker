@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 
 Route::get('/', function () {
-    return redirect('quacks');
+    return redirect('feed');
 });
 
 
@@ -26,8 +26,11 @@ Route::middleware('auth')->group(function () {
    
     Route::post('/logout', [SessionController::class, 'destroy']);
 
-    Route::resource('quacks', QuackController::class)->middleware('auth');
-    Route::resource('quashtags', QuashtagController::class)->middleware('auth');
+    Route::resource('feed', QuackController::class)
+    ->middleware('auth')
+    ->names('quacks')
+    ->parameters(['feed' => 'quack']);
+    Route::resource('quashtags', QuashtagController::class);
 
     Route::resource('users', UserController::class);
 
@@ -36,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{user}/follow', [UserController::class, 'unfollow'])
         ->name('users.unfollow');
 
-    Route::get('/user/quacks', [UserController::class, 'quacks'])
+    Route::get('/user/{user}/quacks', [UserController::class, 'quacks'])
         ->name('user.quacks');
 
 });

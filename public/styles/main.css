@@ -310,6 +310,19 @@ header {
     }
 }
 
+.follow_icon {
+    width: 24px;
+    path {
+        color: var(--danger);
+    }
+}
+
+.following {
+    path {
+        fill: var(--danger);
+    }
+}
+
 .header_link {
     padding: .5rem 2rem;
     background: var(--bg);

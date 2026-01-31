@@ -15,7 +15,8 @@
     </div>
 </header>
 <div class="float_menu">
-    <a href="{{ route('user.quacks') }}">Mis Quacks</a>
+    <a href="{{ route('user.quacks', Auth::user()->id) }}">Mis Quacks</a>
+    <a href="{{ route('users.edit', Auth::user()->id) }}">Actualizar datos</a>
     <form action="/logout" method="POST" style="text-align: right; padding: 10px;">
         @csrf
         <input type="submit" value="Cerrar Sesión">
