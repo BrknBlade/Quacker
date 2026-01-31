@@ -59,7 +59,7 @@ class QuackController extends Controller
             $quack->quashtags()->sync($quashtagIds);
         }
 
-        return redirect('quacks');
+        return redirect('feed');
     }
 
     /**
@@ -92,7 +92,7 @@ class QuackController extends Controller
     public function update(UpdateQuackRequest $request, Quack $quack)
     {
         $quack->update($request->all());
-        return redirect('quacks');
+        return redirect('feed');
     }
 
     /**
@@ -101,7 +101,7 @@ class QuackController extends Controller
     public function destroy(Quack $quack)
     {
         $quack->delete();
-        return redirect('quacks');
+        return redirect('feed');
     }
 
     public function like(Quack $quack)

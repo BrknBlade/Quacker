@@ -8,29 +8,47 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 
 Route::get('/', function () {
-    return redirect('quacks');
+    return redirect('feed');
 });
 
-Route::resource('quacks', QuackController::class)->middleware('auth');
-Route::resource('quashtags', QuashtagController::class)->middleware('auth');
 
-Route::get('/login', [SessionController::class, 'create'])->name('login');
-Route::post('/login', [SessionController::class, 'store']);
-Route::post('/logout', [SessionController::class, 'destroy']);
+Route::middleware('guest')->group(function () {
 
-Route::get('/register', [AuthController::class, 'create']);
-Route::post('/register', [AuthController::class, 'store']);
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
 
-Route::resource('users', UserController::class);
+    Route::get('/register', [AuthController::class, 'create']);
+    Route::post('/register', [AuthController::class, 'store']);
+});
 
-Route::get('/user/quacks', [UserController::class, 'quacks'])
-    ->name('user.quacks')
-    ->middleware('auth');
+Route::middleware('auth')->group(function () {
 
-Route::post('/quacks/{quack}/like', [QuackController::class, 'like'])
-    ->name('quacks.like')
-    ->middleware('auth');
+    Route::post('/logout', [SessionController::class, 'destroy']);
 
-Route::post('/quacks/{quack}/requack', [QuackController::class, 'requack'])
-    ->name('quacks.requack')
-    ->middleware('auth');
+    Route::get('/feed', [QuackController::class, 'index']);
+    Route::resource('quacks', QuackController::class);
+    Route::resource('quashtags', QuashtagController::class);
+
+    Route::resource('users', UserController::class);
+
+    Route::post('/users/{user}/follow', [UserController::class, 'follow'])
+        ->name('users.follow');
+    Route::delete('/users/{user}/follow', [UserController::class, 'unfollow'])
+        ->name('users.unfollow');
+
+    Route::get('/user/quacks', [UserController::class, 'quacks'])
+        ->name('user.quacks');
+
+    Route::get('/user/quacks', [UserController::class, 'quacks'])
+        ->name('user.quacks')
+        ->middleware('auth');
+
+    Route::post('/quacks/{quack}/like', [QuackController::class, 'like'])
+        ->name('quacks.like')
+        ->middleware('auth');
+
+    Route::post('/quacks/{quack}/requack', [QuackController::class, 'requack'])
+        ->name('quacks.requack')
+        ->middleware('auth');
+
+});
