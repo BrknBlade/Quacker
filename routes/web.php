@@ -19,6 +19,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/register', [AuthController::class, 'create']);
     Route::post('/register', [AuthController::class, 'store']);
+    
 });
 
 Route::middleware('auth')->group(function () {
