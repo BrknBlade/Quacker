@@ -39,8 +39,20 @@ class QuashtagController extends Controller
      */
     public function show(Quashtag $quashtag)
     {
-        return view('quashtags.show',[
-            'quashtag' => $quashtag
+        $order = request('order', 'desc');
+
+        $query = $quashtag->quacks()
+            ->with(['author:id,name'])
+            ->withCount(['likes', 'requackers']);
+
+        $quacks = ($order === 'asc')
+            ? $query->oldest()
+            : $query->latest();
+
+        return view('quashtags.show', [
+            'quashtag' => $quashtag,
+            'quacks' => $quacks->get(),
+            'order' => $order,
         ]);
     }
 

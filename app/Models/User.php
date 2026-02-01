@@ -48,11 +48,13 @@ class User extends Authenticatable
     }
 
     public function following(){
-        return $this->belongsToMany(User::class, 'user_user', 'follower_id', 'following_id');
+        return $this->belongsToMany(User::class, 'user_user', 'follower_id', 'following_id')
+        ->withTimestamps();
     }
 
     public function followers(){
-        return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id');
+        return $this->belongsToMany(User::class, 'user_user', 'following_id', 'follower_id')
+        ->withTimestamps();
     }
 
     public function quacks(): HasMany {
@@ -60,10 +62,31 @@ class User extends Authenticatable
     }
 
     public function requackedQuacks(){
-        return $this->belongsToMany(Quack::class, 'quack_user', 'user_id', 'quack_id');
+        return $this->belongsToMany(Quack::class, 'quacker_user');
     }
 
     public function quavedQuacks(){
         return $this->belongsToMany(Quack::class, 'quack_user_quav', 'user_id', 'quack_id');
     }
+
+    public function likedQuacks(){
+        return $this->belongsToMany(Quack::class, 'likes');
+    }
+
+    public function getFeedAttribute() {
+        $feed = $this
+            ->quacks()
+            ->select('quacks.*', 'created_at as feed_date')
+            ->union(
+                $this
+                    ->requackedQuacks()
+                    ->select('quacks.*', 'quacker_user.created_at as feed_date')
+            )
+            ->orderByDesc('feed_date', 'desc')
+            ->get();
+
+        return $feed;
+
+    }
+
 }

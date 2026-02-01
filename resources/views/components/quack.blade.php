@@ -27,4 +27,9 @@
             <p>No me gusta este post</p>
         </article>
     @endif
+        @if (trim($slot))
+        <div class="quack_actions">
+            {{ $slot }}
+        </div>
+    @endif
 </div>

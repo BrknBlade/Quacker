@@ -1,21 +1,9 @@
 # Proyecto Quacker (Hitos 3 y 4)
 Proyecto de clases.
 ## Como desplegar
-1. Dentro del proyecto debes de ejecuatar los siguientes comandos:
+1. Dentro del proyecto debes de ejecuatar el siguiente comando:
 ```bash
-composer install
-
-npm install
-
-cp .env.example .env
-
-php artisan key:generate
-
-touch database/database.sqlite
-
-php artisan migrate:fresh --seed
-
-composer run dev
+composer setup
 ```
 
 Las credenciales del usuario de prueba son:
@@ -24,10 +12,6 @@ mail: ignacio@email.com
 password: amoelmvc
 ```
 Puedes crear tu propio usuario si asi lo deseas.
-
-> [!NOTE]
-> Las relaciones estan creadas, sin embargo los quashtagas aun no se agregan
-> al momento de crear el Quack
 
 2. **Si estas desarrollando** Haces los cambios que se te han solicitado y haces un push
 ```bash

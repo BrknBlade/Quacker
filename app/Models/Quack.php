@@ -22,14 +22,19 @@ class Quack extends Model
     }
 
     public function requackers() {
-        return $this->belongsToMany(User::class, 'queacker_user', 'quack_id', 'user_id');
+        return $this->belongsToMany(User::class, 'quacker_user', 'quack_id', 'user_id');
     }
 
     public function quavers() {
         return $this->belongsToMany(User::class, 'quack_user_quav', 'quack_id', 'user_id');
     }
 
+    //quacks_quashtags lo he puesto en plural por no cambiar el nombre de la tabla
     public function quashtags(){
-        return $this->belongsToMany(Quashtag::class, 'quack_quashtag', 'quack_id', 'quashtag_id');
+        return $this->belongsToMany(Quashtag::class, 'quacks_quashtags', 'quack_id', 'quashtag_id');
+    }
+
+    public function likes(){
+        return $this->belongsToMany(User::class, 'likes');
     }
 }
