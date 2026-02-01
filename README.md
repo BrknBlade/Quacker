@@ -1,4 +1,4 @@
-# Proyecto Quacker (Hitos 3 y 4)
+# Proyecto Quacker
 Proyecto de clases.
 ## Como desplegar
 1. Dentro del proyecto debes de ejecuatar el siguiente comando:
