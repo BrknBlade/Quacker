@@ -66,4 +66,8 @@ class User extends Authenticatable
     public function quavedQuacks(){
         return $this->belongsToMany(Quack::class, 'quack_user_quav', 'user_id', 'quack_id');
     }
+
+    public function likedQuacks(){
+        return $this->belongsToMany(Quack::class, 'likes');
+    }
 }

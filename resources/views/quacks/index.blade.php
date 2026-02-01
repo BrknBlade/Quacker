@@ -23,7 +23,22 @@
             comentarios="false"
             user="{{ $quack->user_id }}"
             name="{{ $quack->author->name }}"
-        />
+            likesCount="{{ $quack->likes_count }}"
+        >
+        @auth
+            <form method="POST" action="{{ route('quacks.like', $quack->id) }}">
+                @csrf
+                <button type="submit">Quav</button>
+                <span>{{ $quack->likes_count }}</span>
+            </form>
+
+            <form method="POST" action="{{ route('quacks.requack', $quack->id) }}">
+                @csrf
+                <button type="submit">Requack</button>
+                <span>{{ $quack->requackers_count }}</span>
+            </form>
+        @endauth
+        </x-quack>
     @endforeach
 </body>
 

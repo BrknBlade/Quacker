@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreQuackRequest;
 use App\Http\Requests\UpdateQuackRequest;
 use App\Models\Quack;
+use App\Models\Quashtag;
 use Illuminate\Support\Facades\Auth;
 
 class QuackController extends Controller
@@ -16,7 +17,8 @@ class QuackController extends Controller
     {
         $quacks = Quack::latest()->with([
             'author:id,name'
-        ])->get();
+        ])->withCount(['likes', 'requackers'])
+        ->get();
 
         return view('quacks.index', compact('quacks'));
     }
@@ -37,7 +39,26 @@ class QuackController extends Controller
         $user = Auth::user();
 
         // Esto asocia automáticamente el user_id
-        $user->quacks()->create($request->all());
+        $quack = $user->quacks()->create($request->all());
+
+        //para que sepa que $quack es un Quack
+        /** @var \App\Models\Quack $quack */
+        preg_match_all('/#(\w+)/u', $quack->mensaje, $matches);
+
+        $quashtagNames = array_unique($matches[1]);
+
+        if (!empty($quashtagNames)) {
+            $quashtagIds = [];
+
+            foreach ($quashtagNames as $title) {
+                $quashtag = Quashtag::firstOrCreate(['title' => $title]);
+                $quashtagIds[] = $quashtag->id;
+            }
+
+            //he usado sync antes de lo que sugerio Ignacio porque al parecer es mejor en varias cosas
+            $quack->quashtags()->sync($quashtagIds);
+        }
+
         return redirect('quacks');
     }
 
@@ -46,10 +67,14 @@ class QuackController extends Controller
      */
     public function show(Quack $quack)
     {
+        $quack->load(['author:id,name'])
+            ->loadCount(['likes', 'requackers']);
+
         return view('quacks.show', [
             'quack' => $quack
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -78,4 +103,43 @@ class QuackController extends Controller
         $quack->delete();
         return redirect('quacks');
     }
+
+    public function like(Quack $quack)
+    {
+        //para que sepa que $user es un User
+        /** @var \App\Models\User|null $user */
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        if ($user->likedQuacks()->where('quack_id', $quack->id)->exists()) {
+            $user->likedQuacks()->detach($quack->id);
+        } else {
+            $user->likedQuacks()->attach($quack->id);
+        }
+
+        return back();
+    }
+
+    public function requack(Quack $quack)
+    {
+        /** @var \App\Models\User|null $user */
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        if ($user->requackedQuacks()->where('quack_id', $quack->id)->exists()) {
+            $user->requackedQuacks()->detach($quack->id);
+        } else {
+            $user->requackedQuacks()->attach($quack->id);
+        }
+
+        return back();
+    }
+
+
 }
