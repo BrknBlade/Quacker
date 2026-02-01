@@ -27,7 +27,7 @@ class UserController extends Controller
         return view('users.show', [
             'user' => $user,
             'following' => $user->followers()->where('follower_id', '=', Auth::user()->id)->get(),
-            'quavs' => $user->quacks()->withCount('quavers')->get()->sum('quavers_count'),
+            'quavs' => $user->quacks()->withCount('likes')->get()->sum('likes_count'),
             'requacks' => $user->quacks()->withCount('requackers')->get()->sum('requackers_count')
         ]);
     }

@@ -62,7 +62,7 @@ class User extends Authenticatable
     }
 
     public function requackedQuacks(){
-        return $this->belongsToMany(Quack::class, 'quack_user', 'user_id', 'quack_id');
+        return $this->belongsToMany(Quack::class, 'quacker_user');
     }
 
     public function quavedQuacks(){
@@ -78,11 +78,12 @@ class User extends Authenticatable
             ->quacks()
             ->select('quacks.*', 'created_at as feed_date')
             ->union(
-                $this->requackedQuacks()
-                    ->select('quacks.*', 'requacks.created_at as feed_date')
+                $this
+                    ->requackedQuacks()
+                    ->select('quacks.*', 'quacker_user.created_at as feed_date')
             )
             ->orderByDesc('feed_date', 'desc')
-            ->paginate();
+            ->get();
 
         return $feed;
 

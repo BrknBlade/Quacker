@@ -9,7 +9,7 @@
 <body>
     <x-layout />
     <section class="auth_form">
-        <form method="post" action="/feed" class='form'>
+        <form method="post" action="/quacks" class='form'>
             @csrf
             <label for="titulo">Titulo:</label>
             <input id="titulo" type="text" name="titulo" placeholder="Titulo del tu Quack">

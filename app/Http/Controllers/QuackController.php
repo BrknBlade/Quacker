@@ -6,6 +6,7 @@ use App\Http\Requests\StoreQuackRequest;
 use App\Http\Requests\UpdateQuackRequest;
 use App\Models\Quack;
 use App\Models\Quashtag;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class QuackController extends Controller
@@ -15,12 +16,35 @@ class QuackController extends Controller
      */
     public function index()
     {
-        $quacks = Quack::latest()->with([
+
+       /*  $user = Auth::user();
+
+        $quacks = $user->quacks()
+            ->with(['author:id,name'])
+            ->withCount(['likes', 'requackers'])
+            ->get();
+
+       /*  $quacks = Quack::latest()->with([
             'author:id,name'
         ])->withCount(['likes', 'requackers'])
-        ->get();
+        ->get(); 
+        
+        return view('quacks.index', compact('quacks')); */
 
-        return view('quacks.index', compact('quacks'));
+
+        $quacks = Auth::user()->following->map(function($user) {
+            return $user->feed;
+        })->flatten()
+        ->merge(Auth::user()->feed)
+        ->sortByDesc('feed_date');
+
+        return view('quacks.index', [
+            'quacks' => $quacks->map(function($quack) {
+                $quack->loadCount(['likes', 'requackers']);
+                return $quack;
+            })
+        ]);
+
     }
 
     /**
@@ -110,10 +134,6 @@ class QuackController extends Controller
         /** @var \App\Models\User|null $user */
         $user = Auth::user();
 
-        if (!$user) {
-            return redirect()->route('login');
-        }
-
         if ($user->likedQuacks()->where('quack_id', $quack->id)->exists()) {
             $user->likedQuacks()->detach($quack->id);
         } else {
@@ -127,10 +147,6 @@ class QuackController extends Controller
     {
         /** @var \App\Models\User|null $user */
         $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login');
-        }
 
         if ($user->requackedQuacks()->where('quack_id', $quack->id)->exists()) {
             $user->requackedQuacks()->detach($quack->id);

@@ -33,22 +33,17 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/users/{user}/follow', [UserController::class, 'follow'])
         ->name('users.follow');
+        
     Route::delete('/users/{user}/follow', [UserController::class, 'unfollow'])
         ->name('users.unfollow');
 
-    Route::get('/user/quacks', [UserController::class, 'quacks'])
+    Route::get('/user/{user}/quacks', [UserController::class, 'quacks'])
         ->name('user.quacks');
 
-    Route::get('/user/quacks', [UserController::class, 'quacks'])
-        ->name('user.quacks')
-        ->middleware('auth');
-
     Route::post('/quacks/{quack}/like', [QuackController::class, 'like'])
-        ->name('quacks.like')
-        ->middleware('auth');
+        ->name('quacks.like');
 
     Route::post('/quacks/{quack}/requack', [QuackController::class, 'requack'])
-        ->name('quacks.requack')
-        ->middleware('auth');
+        ->name('quacks.requack');
 
 });
