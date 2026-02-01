@@ -65,7 +65,7 @@ class QuackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Quack $quack)
+    public function show(Quack $quack )
     {
         $quack->load(['author:id,name'])
             ->loadCount(['likes', 'requackers']);

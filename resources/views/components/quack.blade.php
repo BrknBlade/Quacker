@@ -4,16 +4,16 @@
     <p class="quack_content">{{ $mensaje }}</p>
     <img src="/img/{{ $img }}" alt="post_img">
     @if ($detalles != 'false')
-        <a href="/quacks/{{ $id }}" class="details_button">ver detalles</a>
+        <a href="/feed/{{ $id }}" class="details_button">ver detalles</a>
     @endif
     @if ($user == Auth::user()->id)
         <div class="button_container">
-            <form method="post" action="/quacks/{{ $id }}">
+            <form method="post" action="/feed/{{ $id }}">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Delete" class="delete_button">
             </form>
-            <a href="/quacks/{{ $id }}/edit" class="edit_button">Editar</a>
+            <a href="/feed/{{ $id }}/edit" class="edit_button">Editar</a>
         </div>
     @endif
     @if ($comentarios == 'true')

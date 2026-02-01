@@ -1,7 +1,7 @@
 <header>
     <div class="header_menu_container">
         <nav>
-            <a href="{{ route('quacks.index') }}" class="header_link">quacks</a>
+            <a href="{{ route('feed.index') }}" class="header_link">quacks</a>
             <a href="{{ route('quashtags.index') }}" class="header_link">quashtags</a>
             <a href="{{ route('users.index') }}" class="header_link">users</a>
         </nav>
